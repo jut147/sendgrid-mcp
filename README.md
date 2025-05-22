@@ -31,13 +31,17 @@ This server exclusively supports SendGrid's v3 APIs and does not provide support
 ### Contact Management
 
 #### list_contacts
+
 Lists all contacts in your SendGrid account.
+
 ```typescript
 // No parameters required
 ```
 
 #### add_contact
+
 Add a contact to your SendGrid marketing contacts.
+
 ```typescript
 {
   email: string;           // Required: Contact email address
@@ -48,7 +52,9 @@ Add a contact to your SendGrid marketing contacts.
 ```
 
 #### delete_contacts
+
 Delete contacts from your SendGrid account.
+
 ```typescript
 {
   emails: string[];  // Required: Array of email addresses to delete
@@ -56,39 +62,49 @@ Delete contacts from your SendGrid account.
 ```
 
 #### get_contacts_by_list
+
 Get all contacts in a SendGrid list.
+
 ```typescript
 {
-  list_id: string;  // Required: ID of the contact list
+  list_id: string; // Required: ID of the contact list
 }
 ```
 
 ### List Management
 
 #### list_contact_lists
+
 List all contact lists in your SendGrid account.
+
 ```typescript
 // No parameters required
 ```
 
 #### create_contact_list
+
 Create a new contact list in SendGrid.
+
 ```typescript
 {
-  name: string;  // Required: Name of the contact list
+  name: string; // Required: Name of the contact list
 }
 ```
 
 #### delete_list
+
 Delete a contact list from SendGrid.
+
 ```typescript
 {
-  list_id: string;  // Required: ID of the contact list to delete
+  list_id: string; // Required: ID of the contact list to delete
 }
 ```
 
 #### add_contacts_to_list
+
 Add contacts to an existing SendGrid list.
+
 ```typescript
 {
   list_id: string;    // Required: ID of the contact list
@@ -97,7 +113,9 @@ Add contacts to an existing SendGrid list.
 ```
 
 #### remove_contacts_from_list
+
 Remove contacts from a SendGrid list without deleting them.
+
 ```typescript
 {
   list_id: string;    // Required: ID of the contact list
@@ -108,7 +126,9 @@ Remove contacts from a SendGrid list without deleting them.
 ### Email Sending
 
 #### send_email
+
 Send an email using SendGrid.
+
 ```typescript
 {
   to: string;                             // Required: Recipient email address
@@ -122,7 +142,9 @@ Send an email using SendGrid.
 ```
 
 #### send_to_list
+
 Send an email to a contact list using SendGrid Single Sends.
+
 ```typescript
 {
   name: string;                          // Required: Name of the single send
@@ -139,42 +161,52 @@ Send an email to a contact list using SendGrid Single Sends.
 ### Template Management (Dynamic Templates Only)
 
 #### create_template
+
 Create a new dynamic email template.
+
 ```typescript
 {
-  name: string;           // Required: Name of the template
-  subject: string;        // Required: Default subject line
-  html_content: string;   // Required: HTML content with handlebars syntax
-  plain_content: string;  // Required: Plain text content with handlebars syntax
+  name: string; // Required: Name of the template
+  subject: string; // Required: Default subject line
+  html_content: string; // Required: HTML content with handlebars syntax
+  plain_content: string; // Required: Plain text content with handlebars syntax
 }
 ```
 
 #### list_templates
+
 List all dynamic email templates.
+
 ```typescript
 // No parameters required
 ```
 
 #### get_template
+
 Retrieve a template by ID.
+
 ```typescript
 {
-  template_id: string;  // Required: ID of the template to retrieve
+  template_id: string; // Required: ID of the template to retrieve
 }
 ```
 
 #### delete_template
+
 Delete a dynamic template.
+
 ```typescript
 {
-  template_id: string;  // Required: ID of the template to delete
+  template_id: string; // Required: ID of the template to delete
 }
 ```
 
 ### Analytics and Validation
 
 #### get_stats
+
 Get SendGrid email statistics.
+
 ```typescript
 {
   start_date: string;                          // Required: Start date (YYYY-MM-DD)
@@ -184,23 +216,29 @@ Get SendGrid email statistics.
 ```
 
 #### validate_email
+
 Validate an email address using SendGrid.
+
 ```typescript
 {
-  email: string;  // Required: Email address to validate
+  email: string; // Required: Email address to validate
 }
 ```
 
 ### Account Management
 
 #### list_verified_senders
+
 List all verified sender identities.
+
 ```typescript
 // No parameters required
 ```
 
 #### list_suppression_groups
+
 List all unsubscribe groups.
+
 ```typescript
 // No parameters required
 ```
@@ -216,6 +254,7 @@ npm install
 ## Configuration
 
 1. Get your SendGrid API key:
+
    - Log in to your SendGrid account
    - Go to Settings > API Keys
    - Create a new API key with full access permissions
@@ -258,14 +297,17 @@ Note: Tools that modify data (like sending emails or deleting contacts) are inte
 The tests use real API calls to ensure accurate responses. To run the tests:
 
 1. Copy the example environment file:
+
    ```bash
    cp .env.example .env
    ```
 
 2. Edit `.env` and add your SendGrid API key:
+
    ```
    SENDGRID_API_KEY=your-api-key-here
    ```
+
    Note: The `.env` file is gitignored to prevent committing sensitive information.
 
 3. Run the tests:

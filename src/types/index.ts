@@ -32,29 +32,30 @@ export interface SendGridTemplateVersion {
   subject: string;
 }
 
-export interface SendGridStats extends Array<{
-  date: string;
-  stats: Array<{
-    metrics: {
-      opens: number;
-      clicks: number;
-      bounces: number;
-      spam_reports: number;
-      unique_opens: number;
-      unique_clicks: number;
-      blocks: number;
-      delivered: number;
-      bounce_drops?: number;
-      deferred?: number;
-      invalid_emails?: number;
-      processed?: number;
-      requests?: number;
-      spam_report_drops?: number;
-      unsubscribe_drops?: number;
-      unsubscribes?: number;
-    };
-  }>;
-}> {}
+export interface SendGridStats
+  extends Array<{
+    date: string;
+    stats: Array<{
+      metrics: {
+        opens: number;
+        clicks: number;
+        bounces: number;
+        spam_reports: number;
+        unique_opens: number;
+        unique_clicks: number;
+        blocks: number;
+        delivered: number;
+        bounce_drops?: number;
+        deferred?: number;
+        invalid_emails?: number;
+        processed?: number;
+        requests?: number;
+        spam_report_drops?: number;
+        unsubscribe_drops?: number;
+        unsubscribes?: number;
+      };
+    }>;
+  }> {}
 
 export interface SendGridSingleSend {
   id: string;

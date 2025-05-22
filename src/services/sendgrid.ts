@@ -1,6 +1,12 @@
 import { Client } from '@sendgrid/client';
 import sgMail from '@sendgrid/mail';
-import { SendGridContact, SendGridList, SendGridTemplate, SendGridStats, SendGridSingleSend } from '../types/index.js';
+import {
+  SendGridContact,
+  SendGridList,
+  SendGridTemplate,
+  SendGridStats,
+  SendGridSingleSend,
+} from '../types/index.js';
 
 export class SendGridService {
   private client: Client;
@@ -31,12 +37,12 @@ export class SendGridService {
       method: 'POST',
       url: '/v3/marketing/contacts/search',
       body: {
-        query: `email IN (${emails.map(email => `'${email}'`).join(',')})`
-      }
+        query: `email IN (${emails.map((email) => `'${email}'`).join(',')})`,
+      },
     });
-    
+
     const contacts = (searchResponse.body as { result: SendGridContact[] }).result || [];
-    const contactIds = contacts.map(contact => contact.id).filter(id => id) as string[];
+    const contactIds = contacts.map((contact) => contact.id).filter((id) => id) as string[];
 
     if (contactIds.length > 0) {
       // Then delete the contacts by their IDs
@@ -44,8 +50,8 @@ export class SendGridService {
         method: 'DELETE',
         url: '/v3/marketing/contacts',
         qs: {
-          ids: contactIds.join(',')
-        }
+          ids: contactIds.join(','),
+        },
       });
     }
   }
@@ -55,8 +61,8 @@ export class SendGridService {
       method: 'POST',
       url: '/v3/marketing/contacts/search',
       body: {
-        query: "email IS NOT NULL" // Get all contacts that have an email
-      }
+        query: 'email IS NOT NULL', // Get all contacts that have an email
+      },
     });
     return (response.body as { result: SendGridContact[] }).result || [];
   }
@@ -66,8 +72,8 @@ export class SendGridService {
       method: 'PUT',
       url: '/v3/marketing/contacts',
       body: {
-        contacts: [contact]
-      }
+        contacts: [contact],
+      },
     });
     return response;
   }
@@ -77,8 +83,8 @@ export class SendGridService {
       method: 'POST',
       url: '/v3/marketing/contacts/search',
       body: {
-        query: `CONTAINS(list_ids, '${listId}')`
-      }
+        query: `CONTAINS(list_ids, '${listId}')`,
+      },
     });
     return (response.body as { result: SendGridContact[] }).result || [];
   }
@@ -86,7 +92,7 @@ export class SendGridService {
   async getList(listId: string): Promise<SendGridList> {
     const [response] = await this.client.request({
       method: 'GET',
-      url: `/v3/marketing/lists/${listId}`
+      url: `/v3/marketing/lists/${listId}`,
     });
     return response.body as SendGridList;
   }
@@ -94,7 +100,7 @@ export class SendGridService {
   async listContactLists(): Promise<SendGridList[]> {
     const [response] = await this.client.request({
       method: 'GET',
-      url: '/v3/marketing/lists'
+      url: '/v3/marketing/lists',
     });
     return (response.body as { result: SendGridList[] }).result;
   }
@@ -102,7 +108,7 @@ export class SendGridService {
   async deleteList(listId: string): Promise<void> {
     await this.client.request({
       method: 'DELETE',
-      url: `/v3/marketing/lists/${listId}`
+      url: `/v3/marketing/lists/${listId}`,
     });
   }
 
@@ -110,7 +116,7 @@ export class SendGridService {
     const [response] = await this.client.request({
       method: 'POST',
       url: '/v3/marketing/lists',
-      body: { name }
+      body: { name },
     });
     return response.body as SendGridList;
   }
@@ -121,8 +127,8 @@ export class SendGridService {
       url: '/v3/marketing/contacts',
       body: {
         list_ids: [listId],
-        contacts: contactEmails.map(email => ({ email }))
-      }
+        contacts: contactEmails.map((email) => ({ email })),
+      },
     });
     return response;
   }
@@ -133,12 +139,12 @@ export class SendGridService {
       method: 'POST',
       url: '/v3/marketing/contacts/search',
       body: {
-        query: `email IN (${contactEmails.map(email => `'${email}'`).join(',')}) AND CONTAINS(list_ids, '${listId}')`
-      }
+        query: `email IN (${contactEmails.map((email) => `'${email}'`).join(',')}) AND CONTAINS(list_ids, '${listId}')`,
+      },
     });
-    
+
     const contacts = (searchResponse.body as { result: SendGridContact[] }).result || [];
-    const contactIds = contacts.map(contact => contact.id).filter(id => id) as string[];
+    const contactIds = contacts.map((contact) => contact.id).filter((id) => id) as string[];
 
     if (contactIds.length > 0) {
       // Remove the contacts from the list
@@ -146,8 +152,8 @@ export class SendGridService {
         method: 'DELETE',
         url: `/v3/marketing/lists/${listId}/contacts`,
         qs: {
-          contact_ids: contactIds.join(',')
-        }
+          contact_ids: contactIds.join(','),
+        },
       });
     }
   }
@@ -164,12 +170,12 @@ export class SendGridService {
       url: '/v3/templates',
       body: {
         name: params.name,
-        generation: 'dynamic'
-      }
+        generation: 'dynamic',
+      },
     });
 
     const templateId = (response.body as { id: string }).id;
-    
+
     // Create the first version of the template
     const [versionResponse] = await this.client.request({
       method: 'POST',
@@ -180,8 +186,8 @@ export class SendGridService {
         subject: params.subject,
         html_content: params.html_content,
         plain_content: params.plain_content,
-        active: 1
-      }
+        active: 1,
+      },
     });
 
     return {
@@ -189,15 +195,17 @@ export class SendGridService {
       name: params.name,
       generation: 'dynamic',
       updated_at: new Date().toISOString(),
-      versions: [{
-        id: (versionResponse.body as { id: string }).id,
-        template_id: templateId,
-        active: 1,
-        name: `${params.name} v1`,
-        html_content: params.html_content,
-        plain_content: params.plain_content,
-        subject: params.subject
-      }]
+      versions: [
+        {
+          id: (versionResponse.body as { id: string }).id,
+          template_id: templateId,
+          active: 1,
+          name: `${params.name} v1`,
+          html_content: params.html_content,
+          plain_content: params.plain_content,
+          subject: params.subject,
+        },
+      ],
     };
   }
 
@@ -206,16 +214,16 @@ export class SendGridService {
       method: 'GET',
       url: '/v3/templates',
       qs: {
-        generations: 'dynamic'
-      }
+        generations: 'dynamic',
+      },
     });
-    return ((response.body as { templates: SendGridTemplate[] }).templates || []);
+    return (response.body as { templates: SendGridTemplate[] }).templates || [];
   }
 
   async getTemplate(templateId: string): Promise<SendGridTemplate> {
     const [response] = await this.client.request({
       method: 'GET',
-      url: `/v3/templates/${templateId}`
+      url: `/v3/templates/${templateId}`,
     });
     return response.body as SendGridTemplate;
   }
@@ -223,7 +231,7 @@ export class SendGridService {
   async deleteTemplate(templateId: string): Promise<void> {
     await this.client.request({
       method: 'DELETE',
-      url: `/v3/templates/${templateId}`
+      url: `/v3/templates/${templateId}`,
     });
   }
 
@@ -232,7 +240,7 @@ export class SendGridService {
     const [response] = await this.client.request({
       method: 'POST',
       url: '/v3/validations/email',
-      body: { email }
+      body: { email },
     });
     return response.body;
   }
@@ -246,7 +254,7 @@ export class SendGridService {
     const [response] = await this.client.request({
       method: 'GET',
       url: '/v3/stats',
-      qs: params
+      qs: params,
     });
     return response.body as SendGridStats;
   }
@@ -267,7 +275,7 @@ export class SendGridService {
     const [response] = await this.client.request({
       method: 'POST',
       url: '/v3/marketing/singlesends',
-      body: params
+      body: params,
     });
     return response.body as { id: string };
   }
@@ -277,8 +285,8 @@ export class SendGridService {
       method: 'PUT',
       url: `/v3/marketing/singlesends/${singleSendId}/schedule`,
       body: {
-        send_at: sendAt
-      }
+        send_at: sendAt,
+      },
     });
     return response.body;
   }
@@ -286,7 +294,7 @@ export class SendGridService {
   async getSingleSend(singleSendId: string): Promise<SendGridSingleSend> {
     const [response] = await this.client.request({
       method: 'GET',
-      url: `/v3/marketing/singlesends/${singleSendId}`
+      url: `/v3/marketing/singlesends/${singleSendId}`,
     });
     return response.body as SendGridSingleSend;
   }
@@ -294,7 +302,7 @@ export class SendGridService {
   async listSingleSends(): Promise<SendGridSingleSend[]> {
     const [response] = await this.client.request({
       method: 'GET',
-      url: '/v3/marketing/singlesends'
+      url: '/v3/marketing/singlesends',
     });
     return (response.body as { result: SendGridSingleSend[] }).result || [];
   }
@@ -303,7 +311,7 @@ export class SendGridService {
   async getSuppressionGroups() {
     const [response] = await this.client.request({
       method: 'GET',
-      url: '/v3/asm/groups'
+      url: '/v3/asm/groups',
     });
     return response.body;
   }
@@ -312,7 +320,7 @@ export class SendGridService {
   async getVerifiedSenders() {
     const [response] = await this.client.request({
       method: 'GET',
-      url: '/v3/verified_senders'
+      url: '/v3/verified_senders',
     });
     return response.body;
   }

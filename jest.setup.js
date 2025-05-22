@@ -5,5 +5,7 @@ dotenv.config();
 
 // Ensure SENDGRID_API_KEY is set
 if (!process.env.SENDGRID_API_KEY) {
-  throw new Error('SENDGRID_API_KEY environment variable is required for tests. See README.md for setup instructions.');
+  throw new Error(
+    'SENDGRID_API_KEY environment variable is required for tests. See README.md for setup instructions.',
+  );
 }

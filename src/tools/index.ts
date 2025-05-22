@@ -11,13 +11,13 @@ export const getToolDefinitions = (service: SendGridService) => [
         emails: {
           type: 'array',
           items: {
-            type: 'string'
+            type: 'string',
           },
-          description: 'Array of email addresses to delete'
-        }
+          description: 'Array of email addresses to delete',
+        },
       },
-      required: ['emails']
-    }
+      required: ['emails'],
+    },
   },
   {
     name: 'list_contacts',
@@ -25,8 +25,8 @@ export const getToolDefinitions = (service: SendGridService) => [
     inputSchema: {
       type: 'object',
       properties: {},
-      required: []
-    }
+      required: [],
+    },
   },
   {
     name: 'send_email',
@@ -36,35 +36,35 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         to: {
           type: 'string',
-          description: 'Recipient email address'
+          description: 'Recipient email address',
         },
         subject: {
           type: 'string',
-          description: 'Email subject line'
+          description: 'Email subject line',
         },
         text: {
           type: 'string',
-          description: 'Plain text content of the email'
+          description: 'Plain text content of the email',
         },
         html: {
           type: 'string',
-          description: 'HTML content of the email (optional)'
+          description: 'HTML content of the email (optional)',
         },
         from: {
           type: 'string',
-          description: 'Sender email address (must be verified with SendGrid)'
+          description: 'Sender email address (must be verified with SendGrid)',
         },
         template_id: {
           type: 'string',
-          description: 'SendGrid template ID (optional)'
+          description: 'SendGrid template ID (optional)',
         },
         dynamic_template_data: {
           type: 'object',
-          description: 'Dynamic data for template variables (optional)'
-        }
+          description: 'Dynamic data for template variables (optional)',
+        },
       },
-      required: ['to', 'subject', 'text', 'from']
-    }
+      required: ['to', 'subject', 'text', 'from'],
+    },
   },
   {
     name: 'add_contact',
@@ -74,23 +74,23 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         email: {
           type: 'string',
-          description: 'Contact email address'
+          description: 'Contact email address',
         },
         first_name: {
           type: 'string',
-          description: 'Contact first name (optional)'
+          description: 'Contact first name (optional)',
         },
         last_name: {
           type: 'string',
-          description: 'Contact last name (optional)'
+          description: 'Contact last name (optional)',
         },
         custom_fields: {
           type: 'object',
-          description: 'Custom field values (optional)'
-        }
+          description: 'Custom field values (optional)',
+        },
       },
-      required: ['email']
-    }
+      required: ['email'],
+    },
   },
   {
     name: 'create_contact_list',
@@ -100,11 +100,11 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         name: {
           type: 'string',
-          description: 'Name of the contact list'
-        }
+          description: 'Name of the contact list',
+        },
       },
-      required: ['name']
-    }
+      required: ['name'],
+    },
   },
   {
     name: 'add_contacts_to_list',
@@ -114,18 +114,18 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         list_id: {
           type: 'string',
-          description: 'ID of the contact list'
+          description: 'ID of the contact list',
         },
         emails: {
           type: 'array',
           items: {
-            type: 'string'
+            type: 'string',
           },
-          description: 'Array of email addresses to add to the list'
-        }
+          description: 'Array of email addresses to add to the list',
+        },
       },
-      required: ['list_id', 'emails']
-    }
+      required: ['list_id', 'emails'],
+    },
   },
   {
     name: 'create_template',
@@ -135,23 +135,23 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         name: {
           type: 'string',
-          description: 'Name of the template'
+          description: 'Name of the template',
         },
         subject: {
           type: 'string',
-          description: 'Default subject line for the template'
+          description: 'Default subject line for the template',
         },
         html_content: {
           type: 'string',
-          description: 'HTML content of the template'
+          description: 'HTML content of the template',
         },
         plain_content: {
           type: 'string',
-          description: 'Plain text content of the template'
-        }
+          description: 'Plain text content of the template',
+        },
       },
-      required: ['name', 'subject', 'html_content', 'plain_content']
-    }
+      required: ['name', 'subject', 'html_content', 'plain_content'],
+    },
   },
   {
     name: 'get_template',
@@ -161,11 +161,11 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         template_id: {
           type: 'string',
-          description: 'ID of the template to retrieve'
-        }
+          description: 'ID of the template to retrieve',
+        },
       },
-      required: ['template_id']
-    }
+      required: ['template_id'],
+    },
   },
   {
     name: 'delete_template',
@@ -175,11 +175,11 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         template_id: {
           type: 'string',
-          description: 'ID of the template to delete'
-        }
+          description: 'ID of the template to delete',
+        },
       },
-      required: ['template_id']
-    }
+      required: ['template_id'],
+    },
   },
   {
     name: 'validate_email',
@@ -189,11 +189,11 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         email: {
           type: 'string',
-          description: 'Email address to validate'
-        }
+          description: 'Email address to validate',
+        },
       },
-      required: ['email']
-    }
+      required: ['email'],
+    },
   },
   {
     name: 'get_stats',
@@ -203,20 +203,20 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         start_date: {
           type: 'string',
-          description: 'Start date in YYYY-MM-DD format'
+          description: 'Start date in YYYY-MM-DD format',
         },
         end_date: {
           type: 'string',
-          description: 'End date in YYYY-MM-DD format (optional)'
+          description: 'End date in YYYY-MM-DD format (optional)',
         },
         aggregated_by: {
           type: 'string',
           enum: ['day', 'week', 'month'],
-          description: 'How to aggregate the statistics (optional)'
-        }
+          description: 'How to aggregate the statistics (optional)',
+        },
       },
-      required: ['start_date']
-    }
+      required: ['start_date'],
+    },
   },
   {
     name: 'list_templates',
@@ -224,8 +224,8 @@ export const getToolDefinitions = (service: SendGridService) => [
     inputSchema: {
       type: 'object',
       properties: {},
-      required: []
-    }
+      required: [],
+    },
   },
   {
     name: 'delete_list',
@@ -235,11 +235,11 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         list_id: {
           type: 'string',
-          description: 'ID of the contact list to delete'
-        }
+          description: 'ID of the contact list to delete',
+        },
       },
-      required: ['list_id']
-    }
+      required: ['list_id'],
+    },
   },
   {
     name: 'list_contact_lists',
@@ -247,8 +247,8 @@ export const getToolDefinitions = (service: SendGridService) => [
     inputSchema: {
       type: 'object',
       properties: {},
-      required: []
-    }
+      required: [],
+    },
   },
   {
     name: 'get_contacts_by_list',
@@ -258,11 +258,11 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         list_id: {
           type: 'string',
-          description: 'ID of the contact list'
-        }
+          description: 'ID of the contact list',
+        },
       },
-      required: ['list_id']
-    }
+      required: ['list_id'],
+    },
   },
   {
     name: 'list_verified_senders',
@@ -270,8 +270,8 @@ export const getToolDefinitions = (service: SendGridService) => [
     inputSchema: {
       type: 'object',
       properties: {},
-      required: []
-    }
+      required: [],
+    },
   },
   {
     name: 'list_suppression_groups',
@@ -279,8 +279,8 @@ export const getToolDefinitions = (service: SendGridService) => [
     inputSchema: {
       type: 'object',
       properties: {},
-      required: []
-    }
+      required: [],
+    },
   },
   {
     name: 'send_to_list',
@@ -290,42 +290,44 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         name: {
           type: 'string',
-          description: 'Name of the single send'
+          description: 'Name of the single send',
         },
         list_ids: {
           type: 'array',
           items: {
-            type: 'string'
+            type: 'string',
           },
-          description: 'Array of list IDs to send to'
+          description: 'Array of list IDs to send to',
         },
         subject: {
           type: 'string',
-          description: 'Email subject line'
+          description: 'Email subject line',
         },
         html_content: {
           type: 'string',
-          description: 'HTML content of the email'
+          description: 'HTML content of the email',
         },
         plain_content: {
           type: 'string',
-          description: 'Plain text content of the email'
+          description: 'Plain text content of the email',
         },
         sender_id: {
           type: 'number',
-          description: 'ID of the verified sender'
+          description: 'ID of the verified sender',
         },
         suppression_group_id: {
           type: 'number',
-          description: 'ID of the suppression group for unsubscribes (required if custom_unsubscribe_url not provided)'
+          description:
+            'ID of the suppression group for unsubscribes (required if custom_unsubscribe_url not provided)',
         },
         custom_unsubscribe_url: {
           type: 'string',
-          description: 'Custom URL for unsubscribes (required if suppression_group_id not provided)'
-        }
+          description:
+            'Custom URL for unsubscribes (required if suppression_group_id not provided)',
+        },
       },
-      required: ['name', 'list_ids', 'subject', 'html_content', 'plain_content', 'sender_id']
-    }
+      required: ['name', 'list_ids', 'subject', 'html_content', 'plain_content', 'sender_id'],
+    },
   },
   {
     name: 'get_single_send',
@@ -335,11 +337,11 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         single_send_id: {
           type: 'string',
-          description: 'ID of the single send to retrieve'
-        }
+          description: 'ID of the single send to retrieve',
+        },
       },
-      required: ['single_send_id']
-    }
+      required: ['single_send_id'],
+    },
   },
   {
     name: 'list_single_sends',
@@ -347,8 +349,8 @@ export const getToolDefinitions = (service: SendGridService) => [
     inputSchema: {
       type: 'object',
       properties: {},
-      required: []
-    }
+      required: [],
+    },
   },
   {
     name: 'remove_contacts_from_list',
@@ -358,38 +360,46 @@ export const getToolDefinitions = (service: SendGridService) => [
       properties: {
         list_id: {
           type: 'string',
-          description: 'ID of the contact list'
+          description: 'ID of the contact list',
         },
         emails: {
           type: 'array',
           items: {
-            type: 'string'
+            type: 'string',
           },
-          description: 'Array of email addresses to remove from the list'
-        }
+          description: 'Array of email addresses to remove from the list',
+        },
       },
-      required: ['list_id', 'emails']
-    }
-  }
+      required: ['list_id', 'emails'],
+    },
+  },
 ];
 
 export const handleToolCall = async (service: SendGridService, name: string, args: any) => {
   switch (name) {
     case 'delete_contacts':
       await service.deleteContactsByEmails(args.emails);
-      return { content: [{ type: 'text', text: `Successfully deleted ${args.emails.length} contacts` }] };
+      return {
+        content: [{ type: 'text', text: `Successfully deleted ${args.emails.length} contacts` }],
+      };
 
     case 'list_contacts':
       const allContacts = await service.listAllContacts();
       return {
-        content: [{
-          type: 'text',
-          text: JSON.stringify(allContacts.map(c => ({
-            email: c.email,
-            first_name: c.first_name,
-            last_name: c.last_name
-          })), null, 2)
-        }]
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(
+              allContacts.map((c) => ({
+                email: c.email,
+                first_name: c.first_name,
+                last_name: c.last_name,
+              })),
+              null,
+              2,
+            ),
+          },
+        ],
       };
 
     case 'send_email':
@@ -402,15 +412,27 @@ export const handleToolCall = async (service: SendGridService, name: string, arg
 
     case 'create_contact_list':
       const list = await service.createList(args.name);
-      return { content: [{ type: 'text', text: `Contact list "${args.name}" created with ID: ${list.id}` }] };
+      return {
+        content: [
+          { type: 'text', text: `Contact list "${args.name}" created with ID: ${list.id}` },
+        ],
+      };
 
     case 'add_contacts_to_list':
       await service.addContactsToList(args.list_id, args.emails);
-      return { content: [{ type: 'text', text: `Added ${args.emails.length} contacts to list ${args.list_id}` }] };
+      return {
+        content: [
+          { type: 'text', text: `Added ${args.emails.length} contacts to list ${args.list_id}` },
+        ],
+      };
 
     case 'create_template':
       const template = await service.createTemplate(args);
-      return { content: [{ type: 'text', text: `Template "${args.name}" created with ID: ${template.id}` }] };
+      return {
+        content: [
+          { type: 'text', text: `Template "${args.name}" created with ID: ${template.id}` },
+        ],
+      };
 
     case 'get_template':
       const retrievedTemplate = await service.getTemplate(args.template_id);
@@ -418,7 +440,9 @@ export const handleToolCall = async (service: SendGridService, name: string, arg
 
     case 'delete_template':
       await service.deleteTemplate(args.template_id);
-      return { content: [{ type: 'text', text: `Template ${args.template_id} deleted successfully` }] };
+      return {
+        content: [{ type: 'text', text: `Template ${args.template_id} deleted successfully` }],
+      };
 
     case 'validate_email':
       const validation = await service.validateEmail(args.email);
@@ -431,64 +455,88 @@ export const handleToolCall = async (service: SendGridService, name: string, arg
     case 'list_templates':
       const templates = await service.listTemplates();
       return {
-        content: [{
-          type: 'text',
-          text: JSON.stringify(templates.map(t => ({
-            id: t.id,
-            name: t.name,
-            generation: t.generation,
-            updated_at: t.updated_at,
-            versions: t.versions.length
-          })), null, 2)
-        }]
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(
+              templates.map((t) => ({
+                id: t.id,
+                name: t.name,
+                generation: t.generation,
+                updated_at: t.updated_at,
+                versions: t.versions.length,
+              })),
+              null,
+              2,
+            ),
+          },
+        ],
       };
 
     case 'delete_list':
       await service.deleteList(args.list_id);
-      return { content: [{ type: 'text', text: `Contact list ${args.list_id} deleted successfully` }] };
+      return {
+        content: [{ type: 'text', text: `Contact list ${args.list_id} deleted successfully` }],
+      };
 
     case 'list_contact_lists':
       const lists = await service.listContactLists();
       return {
-        content: [{
-          type: 'text',
-          text: JSON.stringify(lists.map(l => ({
-            id: l.id,
-            name: l.name,
-            contact_count: l.contact_count
-          })), null, 2)
-        }]
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(
+              lists.map((l) => ({
+                id: l.id,
+                name: l.name,
+                contact_count: l.contact_count,
+              })),
+              null,
+              2,
+            ),
+          },
+        ],
       };
 
     case 'get_contacts_by_list':
       const contacts = await service.getContactsByList(args.list_id);
       return {
-        content: [{
-          type: 'text',
-          text: JSON.stringify(contacts.map(c => ({
-            email: c.email,
-            first_name: c.first_name,
-            last_name: c.last_name
-          })), null, 2)
-        }]
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(
+              contacts.map((c) => ({
+                email: c.email,
+                first_name: c.first_name,
+                last_name: c.last_name,
+              })),
+              null,
+              2,
+            ),
+          },
+        ],
       };
 
     case 'list_verified_senders':
       const senders = await service.getVerifiedSenders();
       return {
-        content: [{
-          type: 'text',
-          text: JSON.stringify(senders, null, 2)
-        }]
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(senders, null, 2),
+          },
+        ],
       };
 
     case 'list_suppression_groups':
       const groups = await service.getSuppressionGroups();
       return {
-        content: [{
-          type: 'text',
-          text: JSON.stringify(groups, null, 2)
-        }]
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(groups, null, 2),
+          },
+        ],
       };
 
     case 'send_to_list':
@@ -499,7 +547,7 @@ export const handleToolCall = async (service: SendGridService, name: string, arg
       const newSingleSend = await service.createSingleSend({
         name: args.name,
         send_to: {
-          list_ids: args.list_ids
+          list_ids: args.list_ids,
         },
         email_config: {
           subject: args.subject,
@@ -507,52 +555,73 @@ export const handleToolCall = async (service: SendGridService, name: string, arg
           plain_content: args.plain_content,
           sender_id: args.sender_id,
           suppression_group_id: args.suppression_group_id,
-          custom_unsubscribe_url: args.custom_unsubscribe_url
-        }
+          custom_unsubscribe_url: args.custom_unsubscribe_url,
+        },
       });
-      
+
       // Schedule it to send immediately
       await service.scheduleSingleSend(newSingleSend.id, 'now');
-      
+
       return {
-        content: [{
-          type: 'text',
-          text: `Email "${args.name}" has been sent to the specified lists`
-        }]
+        content: [
+          {
+            type: 'text',
+            text: `Email "${args.name}" has been sent to the specified lists`,
+          },
+        ],
       };
 
     case 'get_single_send':
       const retrievedSingleSend = await service.getSingleSend(args.single_send_id);
       return {
-        content: [{
-          type: 'text',
-          text: JSON.stringify({
-            id: retrievedSingleSend.id,
-            name: retrievedSingleSend.name,
-            status: retrievedSingleSend.status,
-            send_at: retrievedSingleSend.send_at,
-            list_ids: retrievedSingleSend.send_to.list_ids
-          }, null, 2)
-        }]
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(
+              {
+                id: retrievedSingleSend.id,
+                name: retrievedSingleSend.name,
+                status: retrievedSingleSend.status,
+                send_at: retrievedSingleSend.send_at,
+                list_ids: retrievedSingleSend.send_to.list_ids,
+              },
+              null,
+              2,
+            ),
+          },
+        ],
       };
 
     case 'list_single_sends':
       const allSingleSends = await service.listSingleSends();
       return {
-        content: [{
-          type: 'text',
-          text: JSON.stringify(allSingleSends.map((s: SendGridSingleSend) => ({
-            id: s.id,
-            name: s.name,
-            status: s.status,
-            send_at: s.send_at
-          })), null, 2)
-        }]
+        content: [
+          {
+            type: 'text',
+            text: JSON.stringify(
+              allSingleSends.map((s: SendGridSingleSend) => ({
+                id: s.id,
+                name: s.name,
+                status: s.status,
+                send_at: s.send_at,
+              })),
+              null,
+              2,
+            ),
+          },
+        ],
       };
 
     case 'remove_contacts_from_list':
       await service.removeContactsFromList(args.list_id, args.emails);
-      return { content: [{ type: 'text', text: `Removed ${args.emails.length} contacts from list ${args.list_id}` }] };
+      return {
+        content: [
+          {
+            type: 'text',
+            text: `Removed ${args.emails.length} contacts from list ${args.list_id}`,
+          },
+        ],
+      };
 
     default:
       throw new Error(`Unknown tool: ${name}`);

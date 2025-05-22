@@ -3,16 +3,16 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
   ErrorCode,
   McpError,
-} from "@modelcontextprotocol/sdk/types.js";
-import { SendGridService } from "./services/sendgrid.js";
-import { getToolDefinitions, handleToolCall } from "./tools/index.js";
+} from '@modelcontextprotocol/sdk/types.js';
+import { SendGridService } from './services/sendgrid.js';
+import { getToolDefinitions, handleToolCall } from './tools/index.js';
 
 // Initialize SendGrid with API key from environment variable
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
@@ -25,14 +25,14 @@ const sendGridService = new SendGridService(SENDGRID_API_KEY);
 
 const server = new Server(
   {
-    name: "sendgrid-mcp-server",
-    version: "0.2.0",
+    name: 'sendgrid-mcp-server',
+    version: '0.2.0',
   },
   {
     capabilities: {
       tools: {},
     },
-  }
+  },
 );
 
 /**
@@ -41,7 +41,7 @@ const server = new Server(
  */
 server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
-    tools: getToolDefinitions(sendGridService)
+    tools: getToolDefinitions(sendGridService),
   };
 });
 
@@ -54,23 +54,20 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     return await handleToolCall(sendGridService, request.params.name, request.params.arguments);
   } catch (error: any) {
     console.error('SendGrid Error:', error);
-    
+
     // Handle SendGrid API errors
     if (error.response?.body?.errors) {
       throw new McpError(
         ErrorCode.InternalError,
-        `SendGrid API Error: ${error.response.body.errors.map((e: { message: string }) => e.message).join(', ')}`
+        `SendGrid API Error: ${error.response.body.errors.map((e: { message: string }) => e.message).join(', ')}`,
       );
     }
-    
+
     // Handle other errors
     if (error instanceof Error) {
-      throw new McpError(
-        ErrorCode.InternalError,
-        error.message
-      );
+      throw new McpError(ErrorCode.InternalError, error.message);
     }
-    
+
     throw new McpError(ErrorCode.InternalError, 'An unexpected error occurred');
   }
 });
@@ -85,6 +82,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error("Server error:", error);
+  console.error('Server error:', error);
   process.exit(1);
 });
